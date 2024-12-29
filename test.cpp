@@ -8,26 +8,26 @@ struct dish {
 	int price;
 };
 struct menu {
-	//²Ëµ¥×î¶à100¸ö²Ë
+	//èœå•æœ€å¤š100ä¸ªèœ
 	dish cai[100];
 	int size;
 	char filename[100];
 };
-//Ïò²Ëµ¥ÖĞÌí¼Ó²ËÆ·
+//å‘èœå•ä¸­æ·»åŠ èœå“
 void addDish(menu* caidan) {
-	cout << "²ËÆ·Ãû³Æ£º";
+	cout << "èœå“åç§°ï¼š";
 	cin >> caidan->cai[caidan->size].name;
-	cout << "¼Û¸ñ:";
+	cout << "ä»·æ ¼:";
 	cin >> caidan->cai[caidan->size].price;
 	caidan->size++;
-	cout << "Ìí¼Ó³É¹¦" << endl;
+	cout << "æ·»åŠ æˆåŠŸ" << endl;
 	system("pause");
 	system("cls");
 }
-//Õ¹Ê¾²Ëµ¥
+//å±•ç¤ºèœå•
 void showdishmenu(menu* caidan) {
 	if (caidan->size == 0) {
-		cout << "ÎŞ²Ëµ¥" << endl;
+		cout << "æ— èœå•" << endl;
 		system("pause");
 		system("cls");
 	}
@@ -41,7 +41,7 @@ void showdishmenu(menu* caidan) {
 	}
 
 }
-//±£´æ²Ëµ¥µ½ÎÄ¼ş
+//ä¿å­˜èœå•åˆ°æ–‡ä»¶
 void savetoFile(menu* caidan, char* filename) {
 	ofstream outfile(filename);
 	if (outfile.is_open()) {
@@ -49,15 +49,15 @@ void savetoFile(menu* caidan, char* filename) {
 			outfile << caidan->cai[i].name << " " << caidan->cai[i].price << endl;
 		}
 		outfile.close();
-		cout << "ÒÑ±£´æµ½ÎÄ¼ş" << endl;
+		cout << "å·²ä¿å­˜åˆ°æ–‡ä»¶" << endl;
 	}
 	else {
-		cout << "ÎŞ·¨´ò¿ªÎÄ¼ş" << endl;
+		cout << "æ— æ³•æ‰“å¼€æ–‡ä»¶" << endl;
 	}
 	system("pause");
 	system("cls");
 }
-//²éÑ¯²ËÆ·ÊÇ·ñ´æÔÚ
+//æŸ¥è¯¢èœå“æ˜¯å¦å­˜åœ¨
 int isExit(menu* caidan, char* name) {
 	for (int i = 0; i < caidan->size; i++) {
 		if (!(strcmp(caidan->cai[i].name, name)))
@@ -65,9 +65,9 @@ int isExit(menu* caidan, char* name) {
 	}
 	return -1;
 }
-//É¾³ı²Ëµ¥ÖĞµÄ²ËÆ·
+//åˆ é™¤èœå•ä¸­çš„èœå“
 void deleteDish(menu* caidan) {
-	cout << "ÊäÈëÉ¾³ı²ËÆ·Ãû³Æ";
+	cout << "è¾“å…¥åˆ é™¤èœå“åç§°";
 	char name[100];
 	cin >> name;
 	int ret = isExit(caidan, name);
@@ -76,50 +76,50 @@ void deleteDish(menu* caidan) {
 			caidan->cai[i] = caidan->cai[i + 1];
 		}
 		caidan->size--;
-		cout << "É¾³ı³É¹¦" << endl;
+		cout << "åˆ é™¤æˆåŠŸ" << endl;
 	}
-	else cout << "Î´ÕÒµ½Ïà¹Ø²ËÆ·" << endl;
+	else cout << "æœªæ‰¾åˆ°ç›¸å…³èœå“" << endl;
 	system("pause");
 	system("cls");
 }
-//ĞŞ¸Ä²Ëµ¥ÖĞµÄ²ËÆ·
+//ä¿®æ”¹èœå•ä¸­çš„èœå“
 void changeDish(menu* caidan) {
-	cout << "ÊäÈëÒªĞŞ¸ÄµÄÃû³Æ";
+	cout << "è¾“å…¥è¦ä¿®æ”¹çš„åç§°";
 	char name[100];
 	cin >> name;
 	int ret = isExit(caidan, name);
 	if (ret != -1) {
-		cout << "ÇëÊäÈëĞŞ¸ÄºóµÄÃû³Æ";
+		cout << "è¯·è¾“å…¥ä¿®æ”¹åçš„åç§°";
 		char changeName[100];
 		cin >> changeName;
 		strcpy(caidan->cai[ret].name, changeName);
-		cout << "ÇëÊäÈëĞŞ¸ÄºóµÄ¼Û¸ñ";
+		cout << "è¯·è¾“å…¥ä¿®æ”¹åçš„ä»·æ ¼";
 		int newPrice;
 		cin >> newPrice;
 		caidan->cai[ret].price = newPrice;
 	}
-	else cout << "Î´ÕÒµ½¸Ã²ËÆ·" << endl;
+	else cout << "æœªæ‰¾åˆ°è¯¥èœå“" << endl;
 	system("pause");
 	system("cls");
 
 }
-//ÏµÍ³¹ÜÀíÔ±¶Ô²Ëµ¥ÉèÖÃ
+//ç³»ç»Ÿç®¡ç†å‘˜å¯¹èœå•è®¾ç½®
 void shezhimenu(menu* caidan, char* filename) {
 	while (1) {
-		cout << "ÊäÈë¶ÔÓ¦±àÂë" << endl;
-		cout << "1.¼ÓÈë²ËÆ·" << endl;
-		cout << "2.É¾³ı²ËÆ·" << endl;
-		cout << "3.ĞŞ¸Ä²ËÆ·" << endl;
-		cout << "4.²é¿´²ËÆ·" << endl;
-		cout << "5.±£´æµ½ÎÄ¼ş" << endl;
-		cout << "0.ÍË³ö" << endl;
+		cout << "è¾“å…¥å¯¹åº”ç¼–ç " << endl;
+		cout << "1.åŠ å…¥èœå“" << endl;
+		cout << "2.åˆ é™¤èœå“" << endl;
+		cout << "3.ä¿®æ”¹èœå“" << endl;
+		cout << "4.æŸ¥çœ‹èœå“" << endl;
+		cout << "5.ä¿å­˜åˆ°æ–‡ä»¶" << endl;
+		cout << "0.é€€å‡º" << endl;
 		int n; cin >> n;
 		switch (n) {
 		case 1:
 			addDish(caidan);
 			break;
 		case 2:
-			cout << "ÊäÈëÃû³Æ£º";
+			cout << "è¾“å…¥åç§°ï¼š";
 			deleteDish(caidan);
 			break;
 		case 3:
@@ -136,20 +136,20 @@ void shezhimenu(menu* caidan, char* filename) {
 		}
 	}
 }
-//Õ¹Ê¾Ò³Ãæ
+//å±•ç¤ºé¡µé¢
 void showmenu() {
-	cout << "ÇëÊäÈëÏà¹Ø±àºÅ" << endl;
-	cout << "1.¹Ë¿Í" << endl;
-	cout << "2.³øÊ¦" << endl;
-	cout << "3.·şÎñÔ±" << endl;
-	cout << "4.ÏµÍ³¹ÜÀíÔ±" << endl;
-	cout << "5.ÊÕÒøÔ±" << endl;
-	cout << "6.ÀÏ°å" << endl;
-	cout << "0.ÍË³öÏµÍ³" << endl;
+	cout << "è¯·è¾“å…¥ç›¸å…³ç¼–å·" << endl;
+	cout << "1.é¡¾å®¢" << endl;
+	cout << "2.å¨å¸ˆ" << endl;
+	cout << "3.æœåŠ¡å‘˜" << endl;
+	cout << "4.ç³»ç»Ÿç®¡ç†å‘˜" << endl;
+	cout << "5.æ”¶é“¶å‘˜" << endl;
+	cout << "6.è€æ¿" << endl;
+	cout << "0.é€€å‡ºç³»ç»Ÿ" << endl;
 }
-//ÏµÍ³¹ÜÀíÔ±ÃÜÔ¿123£¬µÇÂ¼º¯Êı
+//ç³»ç»Ÿç®¡ç†å‘˜å¯†é’¥123ï¼Œç™»å½•å‡½æ•°
 int signIn() {
-	cout << "ÇëÊäÈëÃÜÔ¿" << endl;
+	cout << "è¯·è¾“å…¥å¯†é’¥" << endl;
 	int k = 123;
 	int cishu = 3;
 	int key;
@@ -157,21 +157,25 @@ int signIn() {
 		cin >> key;
 		if (key == k) break;
 		else {
-			cout << "ÃÜÂë´íÎó" << endl;
-			cout << "Äã»¹ÓĞ" << cishu-1 << "´Î»ú»á";
+			cout << "å¯†ç é”™è¯¯" << endl;
+			cout << "ä½ è¿˜æœ‰" << cishu-1 << "æ¬¡æœºä¼š";
 			cishu--;
 		}
 	}
 	if (cishu != 0) {
-		cout << "³É¹¦µÇÂ½" << endl;
+		cout << "æˆåŠŸç™»é™†" << endl;
 		system("pause");
 		system("cls");
 		return 1;
 	}
 	else {
-		cout << "µÇÂ¼Ê§°Ü" << endl;
+		cout << "ç™»å½•å¤±è´¥" << endl;
 		return 0;
 	}
+}
+void guke()
+{
+	cout<<"è¯·è¾“å…¥äººæ•°"<<endl;
 }
 int main() {   
 	showmenu();
@@ -189,7 +193,7 @@ int main() {
 		break;
 	case 4:
 		if (!signIn()) {
-			cout << "´íÎó£¬ÍË³öÏµÍ³" << endl;
+			cout << "é”™è¯¯ï¼Œé€€å‡ºç³»ç»Ÿ" << endl;
 			return 0;
 		}
 		shezhimenu(&caidan, filename);
@@ -199,7 +203,7 @@ int main() {
 	case 6:
 		break;
 	case 0:
-		cout << "»¶Ó­ÏÂ´ÎÊ¹ÓÃ" << endl;
+		cout << "æ¬¢è¿ä¸‹æ¬¡ä½¿ç”¨" << endl;
 		system("pause");
 		return 0;
 	}
